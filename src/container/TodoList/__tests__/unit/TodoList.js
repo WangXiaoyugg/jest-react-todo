@@ -23,6 +23,5 @@ it("Header 调用回车时，TodoList 的 undoList 应该新增内容", () => {
     addFn('学习react');
     expect(wrapper.state('undoList').length).toBe(1);
     expect(wrapper.state('undoList')[0]).toBe('学习react');
-
 });
 

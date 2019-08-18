@@ -25,7 +25,6 @@ class TodoList extends Component {
                         return <div key={item}>{item}</div>
                     })
                 }
-
             </div>
         );
     }
