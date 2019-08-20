@@ -9,10 +9,8 @@ class UndoList extends Component {
 
 
     render() {
-        console.log("this.props", this.props);
         const list = this.props.list;
-        console.log("list:", list);
-
+        const deleteItem = this.props.deleteItem;
         return (
             <div>
                 <div data-test="count">{list.length}</div>
@@ -22,7 +20,10 @@ class UndoList extends Component {
                             return (
                                 <li data-test="list-item" key={index}>
                                     {item}
-                                    <span data-test="delete-item">-</span>
+                                    <span
+                                        data-test="delete-item"
+                                        onClick={() => {deleteItem(index)}}
+                                    >-</span>
                                 </li>
                             )
                         })

@@ -8,18 +8,40 @@ it("TodoList 初始化 列表为空", () => {
     expect(wrapper.state('undoList')).toEqual([]);
 });
 
-it("TodoList 给Header 传递一个增加 undoList 内容的方法", () => {
+it("TodoList 给Header 传递addUndoItem方法", () => {
     const wrapper = shallow(<TodoList/>);
     const Header = wrapper.find('Header');
-    expect(Header.prop('addUndoItem')).toBe(wrapper.instance().addUndoItem);
+    expect(Header.prop('addUndoItem')).toBeTruthy();
 });
 
-it("Header 调用回车时，TodoList 的 undoList 应该新增内容", () => {
+it("addUndoItem 被执行的时候，应该新增内容", () => {
     const wrapper = shallow(<TodoList/>);
-    const Header = wrapper.find('Header');
-    const addFn = Header.prop('addUndoItem');
-    addFn('学习react');
+    wrapper.instance().addUndoItem('vue');
     expect(wrapper.state('undoList').length).toBe(1);
-    expect(wrapper.state('undoList')[0]).toBe('学习react');
+    expect(wrapper.state('undoList')[0]).toBe('vue');
+    wrapper.instance().addUndoItem('react');
+    expect(wrapper.state('undoList').length).toBe(2);
 });
 
+it("TodoList 应该给 UndoList 传递 list属性和 deleteItem 方法", () => {
+   const wrapper = shallow(<TodoList/>);
+   const UndoList = wrapper.find('UndoList');
+   expect(UndoList.prop('list')).toBeTruthy();
+   expect(UndoList.prop('deleteItem')).toBeTruthy()
+});
+
+it("TodoList 应该给 UndoList 传递 list属性和 deleteItem 方法", () => {
+    const wrapper = shallow(<TodoList/>);
+    const UndoList = wrapper.find('UndoList');
+    expect(UndoList.prop('list')).toBeTruthy();
+    expect(UndoList.prop('deleteItem')).toBeTruthy()
+});
+
+it("当deleteItem方法被执行的时候，undoList 应该删除内容", () => {
+    const wrapper = shallow(<TodoList/>);
+    wrapper.setState({
+        undoList: ['vue', 'react', 'angular']
+    })
+    wrapper.instance().deleteItem(1);
+    expect(wrapper.state("undoList")).toEqual(['vue', 'angular'])
+});

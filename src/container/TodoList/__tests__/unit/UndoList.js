@@ -33,3 +33,15 @@ it('UndoList 列表数据有内容，存在删除按钮', () => {
     const deleteItems = findTestWrapper(wrapper, 'delete-item');
     expect(deleteItems.length).toEqual(3);
 });
+
+
+it('UndoList 列表数据有内容，点击某个删除按钮，删除列表的某一项', () => {
+    const listData = ['vue', 'react', 'angular'];
+    const fn = jest.fn();
+    const index = 1;
+    const wrapper = shallow(<UndoList list={listData} deleteItem={fn}/>);
+    const deleteItems = findTestWrapper(wrapper, 'delete-item');
+    deleteItems.at(index).simulate('click');
+    expect(fn).toHaveBeenLastCalledWith(index);
+});
+
