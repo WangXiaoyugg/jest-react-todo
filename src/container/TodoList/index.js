@@ -7,6 +7,7 @@ class TodoList extends Component {
         super(props);
         this.addUndoItem = this.addUndoItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
         this.state = {
             undoList: [],
         }
@@ -14,7 +15,10 @@ class TodoList extends Component {
 
     addUndoItem(value) {
         this.setState({
-            undoList: [...this.state.undoList, value],
+            undoList: [...this.state.undoList, {
+                value: value,
+                status: 'div',
+            }],
         })
     }
     deleteItem(index) {
@@ -24,12 +28,17 @@ class TodoList extends Component {
             undoList: newList,
         })
     }
+    changeStatus(index) {
 
+    }
     render() {
         return (
             <div>
                 <Header addUndoItem={this.addUndoItem}/>
-                <UndoList list={this.state.undoList} deleteItem={this.deleteItem}/>
+                <UndoList list={this.state.undoList}
+                          deleteItem={this.deleteItem}
+                          changeStatus={this.changeStatus}
+                />
             </div>
         );
     }

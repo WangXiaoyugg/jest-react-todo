@@ -45,7 +45,7 @@ describe("Header 组件测试", () => {
         expect(fn).not.toHaveBeenCalled();
     });
 
-    it("输入框有内容时，外部函数被调用， 内容被清空", () => {
+    it("输入框有内容时触发回车事件，外部函数被调用， 内容被清空", () => {
         const fn = jest.fn();
         const wrapper = shallow(<Header addUndoItem={fn}/>);
         const inputEl = findTestWrapper(wrapper, 'input');

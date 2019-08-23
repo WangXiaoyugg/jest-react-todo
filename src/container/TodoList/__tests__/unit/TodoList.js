@@ -19,16 +19,21 @@ describe("TodoList 组件测试", () => {
         let {addUndoItem } = wrapper.instance();
         addUndoItem(data);
         expect(wrapper.state('undoList').length).toBe(1);
-        expect(wrapper.state('undoList')[0]).toBe(data);
+        expect(wrapper.state('undoList')[0]).toEqual({
+            status: 'div',
+            value: data
+        });
         addUndoItem(data);
         expect(wrapper.state('undoList').length).toBe(2);
     });
 
-    it(" UndoList 接受 list 和 deleteItem 两个参数", () => {
+    it(" UndoList 接受 list 和 deleteItem, changeStatus 三个参数", () => {
         const wrapper = shallow(<TodoList/>);
         const UndoList = wrapper.find('UndoList');
         expect(UndoList.prop('list')).toBeTruthy();
-        expect(UndoList.prop('deleteItem')).toBeTruthy()
+        expect(UndoList.prop('deleteItem')).toBeTruthy();
+        expect(UndoList.prop('changeStatus')).toBeTruthy();
+
     });
 
 

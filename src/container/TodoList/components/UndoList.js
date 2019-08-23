@@ -11,6 +11,7 @@ class UndoList extends Component {
     render() {
         const list = this.props.list;
         const deleteItem = this.props.deleteItem;
+        const changeStatus = this.props.changeStatus;
         return (
             <div className="undo-list">
                 <div  className="undo-list-title">
@@ -24,8 +25,9 @@ class UndoList extends Component {
                                 <li data-test="list-item"
                                     key={index}
                                     className="undo-list-item"
+                                    onClick={() => changeStatus(index)}
                                 >
-                                    {item}
+                                    {item.value}
                                     <div
                                         className="undo-list-delete"
                                         data-test="delete-item"
