@@ -73,3 +73,12 @@ body {
     background: #e6e6e6;
     border-radius: 50%;
 }
+.uodo-list-input {
+    width: 300px;
+    line-height: 22px;
+    position: relative;
+    top: -1px;
+    font-size: 14px;
+    text-indent: 10px;
+    outline: none;
+}

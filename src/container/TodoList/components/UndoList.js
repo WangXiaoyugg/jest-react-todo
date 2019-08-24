@@ -9,9 +9,7 @@ class UndoList extends Component {
 
 
     render() {
-        const list = this.props.list;
-        const deleteItem = this.props.deleteItem;
-        const changeStatus = this.props.changeStatus;
+        const {handleBlur, list, deleteItem, changeStatus, valueChange} = this.props;
         return (
             <div className="undo-list">
                 <div  className="undo-list-title">
@@ -27,11 +25,22 @@ class UndoList extends Component {
                                     className="undo-list-item"
                                     onClick={() => changeStatus(index)}
                                 >
-                                    {item.value}
+                                    {
+                                        item.status === 'div' ? item.value :
+                                            <input value={item.value}
+                                                   className="uodo-list-input"
+                                                   data-test="input"
+                                                   onBlur={() => handleBlur(index)}
+                                                   onChange={(e) => valueChange(index, e.target.value)}
+                                            />
+                                    }
                                     <div
                                         className="undo-list-delete"
                                         data-test="delete-item"
-                                        onClick={() => {deleteItem(index)}}
+                                        onClick={(e) => {
+                                            e && e.stopPropagation();
+                                            deleteItem(index)
+                                        }}
                                     >-</div>
                                 </li>
                             )
