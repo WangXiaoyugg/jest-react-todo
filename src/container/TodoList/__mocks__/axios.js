@@ -12,8 +12,13 @@ const mockData = {
 export default {
     get(url) {
         if (url === '/undolist.json') {
+
             return new Promise((resolve, reject) => {
-                resolve(mockData)
+                if (this.success) {
+                    resolve(mockData)
+                } else {
+                    reject(new Error());
+                }
             })
         }
     }

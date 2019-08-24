@@ -4,9 +4,11 @@ import {Provider} from 'react-redux'
 import {findTestWrapper} from "../../../../utils/testUtils";
 import TodoList from "../../index"
 import store from '../../../../store/createStore'
+import axios  from '../../__mocks__/axios'
 
 beforeEach(() => {
     jest.useFakeTimers();
+    axios.success = true;
 });
 
 it(`
@@ -59,20 +61,34 @@ it(`
         </Provider>
     );
 
-    // process.nextTick(() => {
-    //     wrapper.update();
-    //     const listItems = findTestWrapper(wrapper, 'list-item');
-    //     expect(listItems.length).toBe(1);
-    //     done()
-    // });
+    jest.runAllTimers();
+    done();
+    process.nextTick(() => {
+        wrapper.update();
+        const listItems = findTestWrapper(wrapper, 'list-item');
+        expect(listItems.length).toBe(1);
+        done()
+    });
 
-        jest.runAllTimers();
-        done();
-        process.nextTick(() => {
-            wrapper.update();
-            const listItems = findTestWrapper(wrapper, 'list-item');
-            expect(listItems.length).toBe(1);
-            done()
-        });
+});
+
+it(`
+   1. 用户打开页面, 请求不正常
+   2. 页面无列表内容，但能把页面显示出来
+`, (done) => {
+    axios.success = false;
+    const  wrapper = mount(
+        <Provider store={store}>
+            <TodoList/>
+        </Provider>
+    );
+    jest.runAllTimers();
+    done();
+    process.nextTick(() => {
+        wrapper.update();
+        const listItem = findTestWrapper(wrapper, 'list-item');
+        expect(listItem.length).toBe(0);
+    })
+
 
 });
