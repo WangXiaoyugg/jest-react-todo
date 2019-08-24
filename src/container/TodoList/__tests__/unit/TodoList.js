@@ -108,6 +108,10 @@ describe("TodoList 组件测试", () => {
                 status: 'input',
                 value: 'vue',
             },
+            {
+                status: 'div',
+                value: 'vue',
+            },
         ];
         const value = 'react';
 
