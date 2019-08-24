@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header'
 import UndoList from './components/UndoList'
+import axios from 'axios'
 
 class TodoList extends Component {
     constructor(props) {
@@ -48,6 +49,26 @@ class TodoList extends Component {
         this.setState({
             undoList: newList
         })
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            axios.get("/undolist.json").then((resp) => {
+                this.setState({
+                    undoList: resp.data
+                })
+            }).catch(e => {
+                // console.log(e)
+            })
+        }, 5000);
+
+        // axios.get("/undolist.json").then((resp) => {
+        //     this.setState({
+        //         undoList: resp.data
+        //     })
+        // }).catch(e => {
+        //     // console.log(e)
+        // })
     }
 
     handleBlur(index) {
