@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from "redux";
-import {reducer as todReducer} from '../container/TodoList/store'
+import {reducer as todReducer} from '../container/TodoListPage/store'
 
 const reducers = combineReducers({
     todo: todReducer,

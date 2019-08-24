@@ -1,11 +1,17 @@
 import React from 'react';
-import TodoList from './container/TodoList'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import TodoList from './container/TodoListPage'
+import NotFound from './container/NotFoundPage'
 
 function App() {
   return (
-    <div className="container" title="garen" data-test="container">
-        <TodoList />
-    </div>
+      <BrowserRouter>
+          <Switch>
+              <Route path="/" component={TodoList} exact/>
+              <Route component={NotFound}/>
+          </Switch>
+
+      </BrowserRouter>
   );
 }
 
